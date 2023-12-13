@@ -1,7 +1,7 @@
 from datasets import load_dataset
-language = 'en'
+language = 'de'
 
-dataset = load_dataset('wikiann','en')
+dataset = load_dataset('wikiann','fr')
 
 label_list = dataset["train"].features[f"ner_tags"].feature.names
 
@@ -110,5 +110,8 @@ trainer = Trainer(
 
 trainer.train()
 
-model.save_pretrained("./xlmroberta-wikiann-en.pt")
-tokenizer.save_pretrained('./xlmroberta-wikiann-en.tk')
+model.save_pretrained("./xlmroberta-wikiann-fr.pt")
+tokenizer.save_pretrained('./xlmroberta-wikiann-fr.tk')
+import json
+with open("./xlmroberta-wikiann-fr-log-history.json", "w") as f:
+    json.dump(trainer.state.log_history, f)
